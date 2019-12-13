@@ -23,6 +23,7 @@ type Item struct {
 type Stats struct {
 	Views       string `json:"views"`
 	Subscribers string `json:"subscriberCount"`
+	Videos      string `json:"videoCount"`
 }
 
 func GetSubscribers() (Item, error) {
