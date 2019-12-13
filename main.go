@@ -14,8 +14,9 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println("%+v\n", item)
+	fmt.Printf("%+v\n", item)
 	fmt.Println("Youtube subscriber monitor")
+	SetRouters()
 }
 
 //SetRouters : Router setting
