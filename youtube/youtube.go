@@ -9,26 +9,6 @@ import (
 	"os"
 )
 
-//Response struct
-type Response struct {
-	Kind  string  `json:"kind"`
-	Items []Items `json:"items"`
-}
-
-//Items struct
-type Items struct {
-	Kind  string `json:"kind"`
-	Id    string `json:"id"`
-	Stats Stats  `json:"statistics"`
-}
-
-//Stats struct
-type Stats struct {
-	Views       string `json:"views"`
-	Subscribers string `json:"subscriberCount"`
-	Videos      string `json:"videoCount"`
-}
-
 //GetSubscribers gets info from api
 func GetSubscribers() (Items, error) {
 	var response Response
@@ -41,13 +21,10 @@ func GetSubscribers() (Items, error) {
 	}
 
 	q := req.URL.Query()
-	//log.Println(q)
 	q.Add("key", os.Getenv("YOUTUBE_KEY"))
-	//log.Println(q)
 	q.Add("id", os.Getenv("ID"))
-	//log.Println(q)
 	q.Add("part", "statistics")
-	//log.Println(q)
+
 	req.URL.RawQuery = q.Encode()
 
 	client := &http.Client{}
