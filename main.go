@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	SetRouters()
+	//SetRouters()
 
 	item, err := youtube.GetSubscribers()
 	if err != nil {

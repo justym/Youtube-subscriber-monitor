@@ -35,13 +35,13 @@ func GetSubscribers() (Item, error) {
 	}
 
 	q := req.URL.Query()
-	log.Println(q)
+	//log.Println(q)
 	q.Add("key", os.Getenv("YOUTUBE_KEY"))
-	log.Println(q)
+	//log.Println(q)
 	q.Add("id", os.Getenv("ID"))
-	log.Println(q)
+	//log.Println(q)
 	q.Add("part", "statistics")
-	log.Println(q)
+	//log.Println(q)
 	req.URL.RawQuery = q.Encode()
 
 	client := &http.Client{}
