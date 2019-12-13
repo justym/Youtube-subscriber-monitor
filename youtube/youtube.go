@@ -10,11 +10,11 @@ import (
 )
 
 type Response struct {
-	Kind  string `json:"kind"`
-	Items []Item `json:"items"`
+	Kind  string  `json:"kind"`
+	Items []Items `json:"items"`
 }
 
-type Item struct {
+type Items struct {
 	Kind  string `json:"kind"`
 	Id    string `json:"id"`
 	Stats Stats  `json:"statistics"`
@@ -26,14 +26,14 @@ type Stats struct {
 	Videos      string `json:"videoCount"`
 }
 
-func GetSubscribers() (Item, error) {
+func GetSubscribers() (Items, error) {
 	var response Response
 
 	req, err := http.NewRequest("GET", "https://www.googleapis.com/youtube/v3/channels", nil)
 	if err != nil {
 		log.Println("34")
 		log.Println(err)
-		return Item{}, err
+		return Items{}, err
 	}
 
 	q := req.URL.Query()
@@ -51,7 +51,7 @@ func GetSubscribers() (Item, error) {
 	if err != nil {
 		log.Println("51")
 		log.Println(err)
-		return Item{}, err
+		return Items{}, err
 	}
 	defer res.Body.Close()
 
@@ -61,12 +61,12 @@ func GetSubscribers() (Item, error) {
 	if err != nil {
 		log.Println("L60")
 		log.Println(err)
-		return Item{}, err
+		return Items{}, err
 	}
 	err = json.Unmarshal(body, &response)
 	if err != nil {
 		log.Println(err)
-		return Item{}, err
+		return Items{}, err
 	}
 	return response.Items[0], nil
 }
