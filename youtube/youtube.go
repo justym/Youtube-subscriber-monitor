@@ -31,6 +31,7 @@ func GetSubscribers() (Item, error) {
 
 	req, err := http.NewRequest("GET", "https://www.googleapis.com/youtube/v3/channels", nil)
 	if err != nil {
+		log.Println("34")
 		log.Println(err)
 		return Item{}, err
 	}
@@ -48,6 +49,7 @@ func GetSubscribers() (Item, error) {
 	client := &http.Client{}
 	res, err := client.Do(req)
 	if err != nil {
+		log.Println("51")
 		log.Println(err)
 		return Item{}, err
 	}
@@ -57,6 +59,7 @@ func GetSubscribers() (Item, error) {
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
+		log.Println("L60")
 		log.Println(err)
 		return Item{}, err
 	}
