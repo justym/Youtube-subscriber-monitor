@@ -11,11 +11,6 @@ import (
 //Handler is struct of http Handler
 type Handler struct{}
 
-//HomeHandler : Display 'Youtube subscriber monitor' at '/'
-func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Youtube subscriber monitor")
-}
-
 //StatsHandler handle stats
 func (h *Handler) StatsHandler(w http.ResponseWriter, r *http.Request) {
 	ws, err := websocket.Upgrade(w, r)
