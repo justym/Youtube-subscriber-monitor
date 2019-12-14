@@ -9,28 +9,33 @@ import (
 	"os"
 )
 
-//GetSubscribers gets info from api
-func GetSubscribers() (Items, error) {
-	var response Response
+const (
+	baseURL = "https://www.googleapis.com/youtube/v3/channels"
+)
 
-	req, err := http.NewRequest("GET", "https://www.googleapis.com/youtube/v3/channels", nil)
-	if err != nil {
-		log.Println("34")
-		log.Println(err)
-		return Items{}, err
-	}
-
-	q := req.URL.Query()
+func SetURLQuery(r *http.Request) {
+	q := r.URL.Query()
 	q.Add("key", os.Getenv("YOUTUBE_KEY"))
 	q.Add("id", os.Getenv("ID"))
 	q.Add("part", "statistics")
 
-	req.URL.RawQuery = q.Encode()
+	r.URL.RawQuery = q.Encode()
+}
+
+//GetSubscribers gets info from api
+func GetSubscribers() (Items, error) {
+
+	req, err := http.NewRequest("GET", baseURL, nil)
+	if err != nil {
+		log.Println(err)
+		return Items{}, err
+	}
+
+	SetURLQuery(req)
 
 	client := &http.Client{}
 	res, err := client.Do(req)
 	if err != nil {
-		log.Println("51")
 		log.Println(err)
 		return Items{}, err
 	}
@@ -40,14 +45,15 @@ func GetSubscribers() (Items, error) {
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Println("L60")
 		log.Println(err)
 		return Items{}, err
 	}
-	err = json.Unmarshal(body, &response)
-	if err != nil {
+
+	var response Response
+	if err = json.Unmarshal(body, &response); err != nil {
 		log.Println(err)
 		return Items{}, err
 	}
+
 	return response.Items[0], nil
 }
