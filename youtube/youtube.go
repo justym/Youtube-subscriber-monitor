@@ -13,6 +13,7 @@ const (
 	baseURL = "https://www.googleapis.com/youtube/v3/channels"
 )
 
+//SetURLQuery sets url for http request
 func SetURLQuery(r *http.Request) {
 	q := r.URL.Query()
 	q.Add("key", os.Getenv("YOUTUBE_KEY"))
