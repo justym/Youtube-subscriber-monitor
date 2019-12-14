@@ -9,7 +9,7 @@ import (
 func main() {
 	handler := Handler{}
 	http.HandleFunc("/stats", handler.StatsHandler)
-	staticHandler := http.FileServer(http.Dir("./"))
+	staticHandler := http.FileServer(http.Dir("./static"))
 	http.Handle("/", staticHandler)
 
 	fmt.Println("Youtube subscriber monitor")
