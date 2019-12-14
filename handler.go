@@ -11,7 +11,7 @@ import (
 //Handler is struct of http Handler
 type Handler struct{}
 
-//HomeHandler : Display sentence at '/'
+//HomeHandler : Display 'Youtube subscriber monitor' at '/'
 func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Youtube subscriber monitor")
 }
